@@ -31,7 +31,7 @@ router.post("/", checkRoles(["admin"]), (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", checkRoles(["admin"]), (req, res) => {
   const { id } = req.params;
   Users.remove(id).then((count) => {
     res.status(200).json(`you just deleted ${count} user mourn them`);

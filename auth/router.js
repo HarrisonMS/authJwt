@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const Users = require("../users/model");
 const secrets = require("../api/vars");
 const { isValid } = require("../users/services");
+
 router.post("/register", (req, res) => {
   const credentials = req.body;
 
@@ -62,7 +63,6 @@ function generateToken(user) {
   const payload = {
     subject: user.id,
     username: user.username,
-    role: user.role,
   };
   const secret = secrets.jwtSecret;
 
