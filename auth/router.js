@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   if (isValid(req.body)) {
-    Users.findBy({ "u.username": username })
+    Users.findBy({ username })
       .then(([user]) => {
         // compare the password the hash stored in the database
         if (user && bcrypt.compareSync(password, user.password)) {
@@ -63,6 +63,7 @@ function generateToken(user) {
   const payload = {
     subject: user.id,
     username: user.username,
+    role: user.role,
   };
   const secret = secrets.jwtSecret;
 

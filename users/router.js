@@ -6,8 +6,9 @@ const { isValid } = require("./services");
 const { checkRoles } = require("../middleware/checkRole");
 
 router.use(restricted);
+//can also be written in line like the check role bellow
 
-router.get("/", (req, res) => {
+router.get("/", checkRoles("admin"), (req, res) => {
   Users.find()
     .then((users) => {
       res.json({ users: users, token: req.jwt });
@@ -15,6 +16,7 @@ router.get("/", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+//im the below
 router.post("/", checkRoles(["admin"]), (req, res) => {
   const user = req.body;
 

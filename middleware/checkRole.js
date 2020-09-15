@@ -5,7 +5,6 @@ module.exports = {
 function checkRoles(roles) {
   return function (req, res, next) {
     const role = req.jwt.role;
-
     if (req.jwt && req.jwt.role && roles.includes(role)) {
       next();
     } else {
